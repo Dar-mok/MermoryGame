@@ -49,7 +49,7 @@ function createCards(colors) {
     const singleCard = document.createElement('div');
     singleCard.classList.add('singleCard');
 
-    singleCard.setAttribute("idNumber", idNum);
+    singleCard.setAttribute("id", idNum);
     singleCard.setAttribute("isFlipped", false);
     singleCard.setAttribute("flippedColor", color);
     singleCard.setAttribute("unFlippedColor", "white");
@@ -88,11 +88,13 @@ let secondCard = false;
 
 
 function handleCardClick(evt) {
-  console.log("inside the handleClick!")
+  console.log("Begin the handleClick!")
   //if clicked card is already flipped exit out
 let currentDiv = evt.target;
+let currentIsFlipped = currentDiv.getAttribute("isFlipped");
+console.log(currentIsFlipped);
 
-if (currentDiv.getAttribute("isFlipped") === true) {  //  <---getAttribute is new here
+if (currentIsFlipped === "true") {  //  <---getAttribute is new here
   console.log("card is already flipped");
   return "";
 }
@@ -100,8 +102,10 @@ if (currentDiv.getAttribute("isFlipped") === true) {  //  <---getAttribute is ne
 //check to see if first card is not defined, if so, make the current div, and flip it over
 if (!firstCard) {
   console.log("creating first card");
-  console.log("logging isFlipped: " + currentDiv.getAttribute("isFlipped"));
   currentDiv.setAttribute("isFlipped", true); // <-- this is new
+
+  console.log("logging isFlipped: " + currentDiv.getAttribute("isFlipped"));
+  // currentDiv.setAttribute("isFlipped", true); // <-- this is new
   firstCard = currentDiv;
   flipCard(currentDiv);
   return "";
@@ -132,5 +136,5 @@ if (firstCard.getAttribute("flippedColor") === secondCard.getAttribute("flippedC
 }
 }, FOUND_MATCH_WAIT_MSECS)
 
-
+return "";
 }
